@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
+const mongoose = require('mongoose');
 const {PORT, CLIENT_ORIGIN} = require('./config');
 const {dbConnect} = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
@@ -35,5 +35,31 @@ if (require.main === module) {
     dbConnect();
     runServer();
 }
+
+app.get('/api/cheeses', (req,res) => {
+    const cheeses =`{"cheeses":[
+        "Bath Blue",
+        "Barkham Blue",
+        "Buxton Blue",
+        "Cheshire Blue",
+        "Devon Blue",
+        "Dorset Blue Vinney",
+        "Dovedale",
+        "Exmoor Blue",
+        "Harbourne Blue",
+        "Lanark Blue",
+        "Lymeswold",
+        "Oxford Blue",
+        "Shropshire Blue",
+        "Stichelton",
+        "Stilton",
+        "Blue Wensleydale",
+        "Yorkshire Blue"
+    ]}`;
+    let json = JSON.parse(cheeses);
+    res.send(json);
+
+})
+
 
 module.exports = {app};
